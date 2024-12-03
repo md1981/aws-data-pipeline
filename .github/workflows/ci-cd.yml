@@ -52,3 +52,13 @@ jobs:
           --template-body file://cloudformation-template.yaml \
           --capabilities CAPABILITY_IAM \
           --parameters ParameterKey=DBPassword,ParameterValue=${{ secrets.DB_PASSWORD }}
+    - name: Verify CloudFormation stack update
+      run: |
+        aws cloudformation wait stack-update-complete --stack-name data-processing-pipeline
+        if [ $? -eq 0 ]; then
+          echo "Stack update completed successfully"
+        else
+          echo "Stack update failed"
+          exit 1
+        fi
+

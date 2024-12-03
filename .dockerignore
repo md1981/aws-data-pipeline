@@ -1,0 +1,7 @@
+.git
+.gitignore
+tests/
+README.md
+cloudformation-template.yaml
+.github/
+
